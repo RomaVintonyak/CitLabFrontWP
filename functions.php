@@ -8,6 +8,7 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action('admin_print_styles', 'print_emoji_styles');
 
 add_action('after_setup_theme', 'load_citlab_theme_settings');
+add_action('after_setup_theme', 'regMenu');
 function load_citlab_theme_settings(){
     // Add supports
    add_theme_support('html5');
@@ -17,6 +18,29 @@ function load_citlab_theme_settings(){
    add_image_size('container-thumbnail', 1240, null, true);
    add_image_size('half-container-thumbnail', 620, null, true);
 }
+//register nav menu
+function regMenu(){
+      register_nav_menu('primary', 'PrimaryMenu');
+}
+//main menu filter
+add_filter('nav_menu_item_id', '__return_false');
+add_filter( 'nav_menu_css_class', '__return_empty_array' );
+add_filter('nav_menu_css_class', 'ClassToLI', 10, 4);
+function ClassToLI($classes, $item, $args, $depth){
+      if ($args->theme_location == 'primary') {
+         $classes [] = 'menu__list--item';
+      }
+      return $classes;
+}
+add_filter( 'nav_menu_link_attributes', 'ClassToLInks', 10, 4 );
+function ClassToLInks( $atts, $item, $args, $depth ) {
+	if($args->theme_location == 'primary') {
+		$class = 'menu__list--link';
+		$atts['class'] = isset( $atts['class'] ) ? "{$atts['class']} $class" : $class;
+	}
+	return $atts;
+}
+//script & styles conect
 add_action('wp_enqueue_scripts', 'scriptStyle');
    function scriptStyle(){
       wp_enqueue_style( 'mainStyle', get_template_directory_uri() . '/assets/css/style.css');
@@ -25,10 +49,16 @@ add_action('wp_enqueue_scripts', 'scriptStyle');
       wp_enqueue_script( 'main', get_template_directory_uri() . '/assets/js/main.js', null, 1, true);
    }
 
-
-
-
-
+// Add acf option page
+add_action('acf/init', 'my_acf_op_init');
+function my_acf_op_init() {
+      acf_add_options_page(array(
+         'page_title' => 'Theme Options',
+         'menu_title' => 'Theme Options',
+         'menu_slug' => 'theme-general-settings',
+         'capability' => 'edit_posts',
+      ));
+}
 
 
 ?>

@@ -213,7 +213,7 @@
         </div><!--./news__btn-->
       </div><!--./container-->
     </section><!--./news-->
-  </main>   
+  </main>
   <?php get_footer(); ?>
 </body>
 </html>

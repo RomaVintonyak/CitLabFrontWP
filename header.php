@@ -12,39 +12,33 @@
    <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-  <!--header-->
-  <header class="header" id="header">
-    <div class="header__row">
-      <div class="navbar__brand">
-        <a href="index.html">
-          <img class="img" src="img/header/logo.svg" alt="logo">
-          <p>God is our judge</p>
-        </a>
+   <!--header-->
+   <header class="header" id="header">
+      <div class="header__row">
+         <div class="navbar__brand">
+            <a href="<?php bloginfo('url'); ?>">
+               <img class="img" src="<?php the_field('nav_logo', 'option'); ?>" alt="logo">
+               <p><?php the_field('nav_text', 'option'); ?></p>
+            </a>
       </div><!--./navbar__brand-->
       <nav class="nav__menu">
-        <ul class="menu__list">
-          <li class="menu__list--item">
-            <a class="menu__list--link" href="#">головна</a>
-          </li>
-          <li class="menu__list--item">
-            <a class="menu__list--link" href="#">про компанію</a>
-          </li>
-          <li class="menu__list--item">
-            <a class="menu__list--link" href="#">спеціалізація</a>
-          </li>
-          <li class="menu__list--item">
-            <a class="menu__list--link" href="#">послуги</a>
-          </li>
-          <li class="menu__list--item">
-            <a class="menu__list--link" href="#">контакти</a>
-          </li>
-        </ul>
+      <?php 
+            wp_nav_menu( [
+               'theme_location'  => 'primary',
+               'menu'            => 'PrimaryMenu', 
+               'container'       => 'ul',
+               'menu_class'      => 'menu__list', 
+               'echo'            => true,
+               'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
+               'depth'           => 0,
+               ] ); 
+         ?>
       </nav><!--./nav__menu-->
       <div class="burgerBtn" id="burgerBtn">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
       </div><!--./burger-->
-    </div><!--./header__row-->
-  </header><!--./header-->
+      </div><!--./header__row-->
+   </header><!--./header-->
