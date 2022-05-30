@@ -59,6 +59,62 @@ function my_acf_op_init() {
          'capability' => 'edit_posts',
       ));
 }
+//Register post types
+add_action( 'init', 'register_custom_post_types' );
+function register_custom_post_types(){
 
+      //Register taxonomy
+      register_taxonomy(
+         'process',
+         'process',
+         array(
+               'label' =>  'Категорії процесів',
+               'hierarchical'               => true,
+               'public'                     => true,
+               'show_ui'                    => true,
+               'show_admin_column'          => true,
+               'show_in_nav_menus'          => true,
+               'show_in_rest'               => null,
+               'rewrite' => array(
+               'slug' => 'process',
+               'with_front' => false
+            )
+         )
+      );
+         
+      $labels = array(
+      'name'               => 'Процеси',
+      'singular_name'      => 'Процес',
+      'add_new'            => 'Додати процес',
+      'add_new_item'       => 'Додавання',
+      'edit_item'          => 'Редагування',
+      'new_item'           => 'Нове',
+      'view_item'          => 'Переглянути',
+      'search_items'       => 'Пошук',
+      'not_found'          => 'Не знайдено',
+      'not_found_in_trash' => 'Не знайдено у кошику',
+      'parent_item_colon'  => '', 
+      'menu_name'          => 'Судові Процеси', 
+   );
 
+   $args = array(
+      'labels' => $labels,
+      'public' => true,
+      'publicly_queryable' => true,
+      'show_ui' => true,
+      'show_in_menu' => true,
+      'menu_position' => 2,
+      'query_var' => true,
+      'rewrite' => true,
+      'capability_type' => 'post',
+      'has_archive' => false,
+      'hierarchical' => false,
+      'menu_icon' => 'dashicons-welcome-learn-more',
+      'description' => "('Process', 'citLab')",
+      'show_in_rest' => false,
+      'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
+      
+   );
+   register_post_type('process', $args);
+}
 ?>

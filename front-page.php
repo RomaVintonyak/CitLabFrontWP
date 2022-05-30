@@ -6,19 +6,14 @@
       <div class="intro__row">
         <div class="intro__content">
           <h1 class="main__title">
-            Lorem ipsum dolor, sit, 
-            amet consectetur adipisicing elit.
+            <?php the_field("main_title"); ?>
           </h1>
           <h2>
-            Lorem ipsum dolor sit, amet, consectetur adipisicing elit. 
-            Numquam quos deleniti expedita animi eum cum nihil sequi iste 
-            a, non nemo, ipsam illo ab itaque nesciunt, voluptate maxime 
-            alias quidem dolores asperiores, facere tenetur. Atque facilis 
-            porro numquam laborum dignissimos!
+            <?php the_field("main_suptitle"); ?>
           </h2>
         </div><!--./main__title-->
         <div class="intro__img">
-          <img class="img" src="img/intro/picture.svg" alt="picture">
+          <img class="img" src="<?php the_field("main_picture"); ?>" alt="picture">
         </div><!--./intro__img-->
       </div><!--./intro__row-->
     </section><!--./intro-->
@@ -26,14 +21,24 @@
     <section id="team" class="team mt-6">
       <div class="container">
         <div class="team__title ">
-          <h2>Наша команда</h2>
+          <h2><?php the_field("team_title"); ?></h2>
           <div class="team__title--img">
-              <img src="img/team/team_fig.svg" alt="figure" class="img">
+              <img src="<?php the_field("team_picture"); ?>" alt="figure" class="img">
           </div>
         </div><!--./team__title-->
         <div class="team__posts mt-6">
           <div class="post__row">
-            <div class="post__coll">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <!--<div class="post__coll">
               <div class="post__coll--title">
                 <img src="img/team/cyvil.svg" alt="post icon">
                 <h3>Цивільний процес</h3>
@@ -58,7 +63,7 @@
                 </div>
               </div>
             </div><!--/.post__coll-->
-            <div class="post__coll">
+            <!--<div class="post__coll">
               <div class="post__coll--title">
                 <img src="img/team/gosp.svg" alt="post icon">
                 <h3>Господарський процес</h3>
@@ -83,7 +88,7 @@
                 </div>
               </div>
             </div><!--/.post__coll-->
-            <div class="post__coll">
+            <!--<div class="post__coll">
               <div class="post__coll--title">
                 <img src="img/team/crym.svg" alt="post icon">
                 <h3>Кримінальний процес</h3>
@@ -108,7 +113,7 @@
                 </div>
               </div>
             </div><!--/.post__coll-->
-            <div class="post__coll">
+            <!--<div class="post__coll">
               <div class="post__coll--title">
                 <img src="img/team/adm.svg" alt="post icon">
                 <h3>Адміністративний процес</h3>
@@ -133,6 +138,14 @@
                 </div>
               </div>
             </div><!--/.post__coll-->
+
+
+
+
+
+
+
+
           </div><!--./post__row-->
         </div><!--./team__posts-->
       </div><!--./container-->
