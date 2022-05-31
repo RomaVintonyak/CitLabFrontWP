@@ -105,18 +105,34 @@
           <h2><?php the_field("news-title"); ?></h2>
         </div><!--./news__title-->
         <div class="news__block mt-6">
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+        <?php
+          if ( have_posts() ) : 
+            query_posts('cat=10');  
+          while (have_posts()) : the_post();
+        ?>
           <div class="news__card">
+            <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="thumbnail" class="img">
+            <div class="card__body">
+              <!--<h4><?php the_title(); ?></h4>-->
+              <p>
+                <?php the_content(); ?>
+              </p>
+              <a href="#">Перейти до поста.</a>
+            </div><!--./card__body-->
+          </div><!--./news__card-->
+        <?php
+        endwhile; 
+        endif;
+        wp_reset_query(); ?>
+          
+          
+          
+          
+          
+          
+          
+          
+          <!--<div class="news__card">
             <img src="img/news/background_thumbnail.svg" alt="thumbnail" class="img">
             <div class="card__body">
               <p>
@@ -126,7 +142,17 @@
               <a href="#">Перейти до поста.</a>
             </div><!--./card__body-->
           </div><!--./news__card-->
-          <div class="news__card">
+          <!--<div class="news__card">
+            <img src="img/news/background_thumbnail.svg" alt="thumbnail" class="img">
+            <div class="card__body">
+              <p>
+                Lorem ipsum dolor sit, amet, consectetur adipisicing elit. 
+                Numquam quos deleniti expedita animi ...
+              </p>
+              <a href="#">Перейти до поста.</a>
+            </div><!--./card__body-->
+          <!--</div><!--./news__card-->
+          <!--<div class="news__card">
             <img src="img/news/background_thumbnail.svg" alt="thumbnail" class="img">
             <div class="card__body">
               <p>
@@ -136,7 +162,7 @@
               <a href="#">Перейти до поста.</a>
             </div><!--./card__body-->
           </div><!--./news__card-->
-          <div class="news__card">
+          <!--<div class="news__card">
             <img src="img/news/background_thumbnail.svg" alt="thumbnail" class="img">
             <div class="card__body">
               <p>
@@ -146,7 +172,7 @@
               <a href="#">Перейти до поста.</a>
             </div><!--./card__body-->
           </div><!--./news__card-->
-          <div class="news__card">
+          <!--<div class="news__card">
             <img src="img/news/background_thumbnail.svg" alt="thumbnail" class="img">
             <div class="card__body">
               <p>
@@ -156,7 +182,7 @@
               <a href="#">Перейти до поста.</a>
             </div><!--./card__body-->
           </div><!--./news__card-->
-          <div class="news__card">
+          <!--<div class="news__card">
             <img src="img/news/background_thumbnail.svg" alt="thumbnail" class="img">
             <div class="card__body">
               <p>
@@ -166,16 +192,11 @@
               <a href="#">Перейти до поста.</a>
             </div><!--./card__body-->
           </div><!--./news__card-->
-          <div class="news__card">
-            <img src="img/news/background_thumbnail.svg" alt="thumbnail" class="img">
-            <div class="card__body">
-              <p>
-                Lorem ipsum dolor sit, amet, consectetur adipisicing elit. 
-                Numquam quos deleniti expedita animi ...
-              </p>
-              <a href="#">Перейти до поста.</a>
-            </div><!--./card__body-->
-          </div><!--./news__card-->
+        
+        
+        
+        
+        
         </div><!--./news__block-->
         <div class="btn__block text__center">
           <button type="button" class="news__btn" id="newsBtn">Завантажити ще</button>
