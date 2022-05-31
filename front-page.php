@@ -28,124 +28,69 @@
         </div><!--./team__title-->
         <div class="team__posts mt-6">
           <div class="post__row">
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <!--<div class="post__coll">
+          <!--header drop down list-->
+          <?php
+          $showList  = get_field("pereglyad_speczialistiv");
+          $closeList = get_field("shovaty_spysok");
+          ?>
+            <?php
+              $args = array(
+                'post_type'      => 'process',
+                'post_status'    => 'publish',
+                'posts_per_page' => - 1,
+              );
+            $query = new WP_Query( $args );
+            ?>
+            <?php if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>	
+            <div class="post__coll">
               <div class="post__coll--title">
-                <img src="img/team/cyvil.svg" alt="post icon">
-                <h3>Цивільний процес</h3>
+                <?php echo the_post_thumbnail( 'thumbnail' ); ?>
+                <h3><?php the_title(); ?></h3>
               </div>
-              <h6>Досудова стадія, участь в судовому провадженні, перегляд рішень.</h6>
+              <h6><?php the_content(); ?></h6>
               <hr>
               <div class="drop__down" id="postDropdowm">
                 <div class="drop__down--header">
                   <div class="header__close">
-                    <h5>Переглянути спеціалістів</h5>
+                    <h5><?php echo $showList ?></h5>
                     <span>&rightarrow;</span>
                   </div>
                   <div class="header__open">
-                    <h5>Сховати список</h5>
+                    <h5><?php echo $closeList ?></h5>
                     <span>&leftarrow;</span>
                   </div>
                 </div>
                 <div class="drop__down--list">
-                  <p>&ndash; Іван &dash; Іванович</p>
-                  <p>&ndash; Іван &dash; Іванович</p>
-                  <p>&ndash; Іван &dash; Іванович</p>
+                  <?php if( have_rows('administratyvnyj_proczes') ): ?>
+                  <!--admin drop down-->
+                    <?php while( have_rows('administratyvnyj_proczes') ): the_row(); ?>
+                      <p>&ndash;<?php the_sub_field('novi_admin_speczialisty'); ?></p>
+                    <?php endwhile; ?>
+                  <?php endif; ?>
+                  <?php if( have_rows('kryminalni_speczialisty') ): ?>
+                    <!--cryminal drop down-->
+                    <?php while( have_rows('kryminalni_speczialisty') ): the_row(); ?>
+                      <p>&ndash;<?php the_sub_field('novyj_kryminalnyj_speczialist'); ?></p>
+                    <?php endwhile; ?>
+                  <?php endif; ?>
+                  <?php if( have_rows('gospodarski_speczialisty') ): ?>
+                    <!--gospodarski drop down-->
+                    <?php while( have_rows('gospodarski_speczialisty') ): the_row(); ?>
+                      <p>&ndash;<?php the_sub_field('novi_gospodarski_speczialisty'); ?></p>
+                    <?php endwhile; ?>
+                  <?php endif; ?>
+                  <?php if( have_rows('speczialisty') ): ?>
+                    <!--cyvil drop down-->
+                    <?php while( have_rows('speczialisty') ): the_row(); ?>
+                      <p>&ndash;<?php the_sub_field('novyj_speczialist'); ?></p>
+                    <?php endwhile; ?>
+                  <?php endif; ?>
                 </div>
               </div>
             </div><!--/.post__coll-->
-            <!--<div class="post__coll">
-              <div class="post__coll--title">
-                <img src="img/team/gosp.svg" alt="post icon">
-                <h3>Господарський процес</h3>
-              </div>
-              <h6>Вся необхідна правова допомога в господарських справах.</h6>
-              <hr>
-              <div class="drop__down" id="postDropdowm">
-                <div class="drop__down--header">
-                  <div class="header__close">
-                    <h5>Переглянути спеціалістів</h5>
-                    <span>&rightarrow;</span>
-                  </div>
-                  <div class="header__open">
-                    <h5>Сховати список</h5>
-                    <span>&leftarrow;</span>
-                  </div>
-                </div>
-                <div class="drop__down--list">
-                  <p>&ndash; Іван &dash; Іванович</p>
-                  <p>&ndash; Іван &dash; Іванович</p>
-                  <p>&ndash; Іван &dash; Іванович</p>
-                </div>
-              </div>
-            </div><!--/.post__coll-->
-            <!--<div class="post__coll">
-              <div class="post__coll--title">
-                <img src="img/team/crym.svg" alt="post icon">
-                <h3>Кримінальний процес</h3>
-              </div>
-              <h6>Весь обсяг юридичних послуг у сфері кримінального.</h6>
-              <hr>
-              <div class="drop__down" id="postDropdowm">
-                <div class="drop__down--header">
-                  <div class="header__close">
-                    <h5>Переглянути спеціалістів</h5>
-                    <span>&rightarrow;</span>
-                  </div>
-                  <div class="header__open">
-                    <h5>Сховати список</h5>
-                    <span>&leftarrow;</span>
-                  </div>
-                </div>
-                <div class="drop__down--list">
-                  <p>&ndash; Іван &dash; Іванович</p>
-                  <p>&ndash; Іван &dash; Іванович</p>
-                  <p>&ndash; Іван &dash; Іванович</p>
-                </div>
-              </div>
-            </div><!--/.post__coll-->
-            <!--<div class="post__coll">
-              <div class="post__coll--title">
-                <img src="img/team/adm.svg" alt="post icon">
-                <h3>Адміністративний процес</h3>
-              </div>
-              <h6>Участь в  судових справах, їх перегляд.</h6>
-              <hr>
-              <div class="drop__down" id="postDropdowm">
-                <div class="drop__down--header">
-                  <div class="header__close">
-                    <h5>Переглянути спеціалістів</h5>
-                    <span>&rightarrow;</span>
-                  </div>
-                  <div class="header__open">
-                    <h5>Сховати список</h5>
-                    <span>&leftarrow;</span>
-                  </div>
-                </div>
-                <div class="drop__down--list">
-                  <p>&ndash; Іван &dash; Іванович</p>
-                  <p>&ndash; Іван &dash; Іванович</p>
-                  <p>&ndash; Іван &dash; Іванович</p>
-                </div>
-              </div>
-            </div><!--/.post__coll-->
-
-
-
-
-
-
-
-
+          <?php endwhile ?>
+          <?php endif ?>
+          <?php wp_reset_postdata();?>	
           </div><!--./post__row-->
         </div><!--./team__posts-->
       </div><!--./container-->
@@ -155,11 +100,22 @@
       <div class="container">
         <div class="news__title ">
           <div class="news__title--img">
-              <img src="img/news/figure.svg" alt="figure" class="img">
+              <img src="<?php the_field("news-img"); ?>" alt="figure" class="img">
           </div>
-          <h2>Новини</h2>
+          <h2><?php the_field("news-title"); ?></h2>
         </div><!--./news__title-->
         <div class="news__block mt-6">
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
           <div class="news__card">
             <img src="img/news/background_thumbnail.svg" alt="thumbnail" class="img">
             <div class="card__body">
