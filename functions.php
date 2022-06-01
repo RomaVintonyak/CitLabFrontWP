@@ -7,9 +7,9 @@ remove_action('admin_print_scripts', 'print_emoji_detection_script');
 remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action('admin_print_styles', 'print_emoji_styles');
 //remove br & p
-remove_filter( 'the_content', 'wpautop' );// для контента
-remove_filter( 'the_excerpt', 'wpautop' );// для анонсов
-remove_filter( 'comment_text', 'wpautop' );// для комментарий
+remove_filter( 'the_content', 'wpautop' );
+remove_filter( 'the_excerpt', 'wpautop' );
+remove_filter( 'comment_text', 'wpautop' );
 
 add_action('after_setup_theme', 'load_citlab_theme_settings');
 add_action('after_setup_theme', 'regMenu');
@@ -51,6 +51,7 @@ add_action('wp_enqueue_scripts', 'scriptStyle');
       wp_deregister_script( 'jquery' );
       wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/js/vendor/jquery-3.4.1.min.js', null, 3, true);
       wp_enqueue_script( 'main', get_template_directory_uri() . '/assets/js/main.js', null, 1, true);
+      wp_enqueue_script( 'loadmore', get_template_directory_uri() . '/assets/js/loadmore.js', null, 1, true);
    }
 
 // Add acf option page
@@ -120,5 +121,29 @@ function register_custom_post_types(){
       
    );
    register_post_type('process', $args);
+}
+//More post
+add_action('wp_ajax_loadmore', 'load_more_posts');
+add_action('wp_ajax_nopriv_loadmore', 'load_more_posts');
+function load_more_posts(){
+      $paged = !empty($_POST['paged']) ? $_POST['paged'] : 1;
+      $paged++;
+      $args = array('posts_per_page' => 6, 'paged' => $paged, 'cat' => 10);
+      query_posts($args);
+      while (have_posts()) : the_post();
+      ?>
+         <div class="news__card">
+            <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="thumbnail" class="img">
+            <div class="card__body">
+               <h4><?php the_title(); ?></h4>
+               <p>
+                  <?php the_content(); ?>
+               </p>
+               <a href="<?php the_permalink(); ?>"><?php echo $postBtn ?></a>
+            </div><!--./card__body-->
+         </div><!--./news__card-->
+   <?php
+   endwhile;
+   wp_die();
 }
 ?>

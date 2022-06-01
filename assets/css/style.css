@@ -995,9 +995,19 @@ a:focus {
 
 .btn__block {
     margin-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+@media (max-width: 768px) {
+    .btn__block {
+        justify-content: center;
+    }
 }
 
 .news__btn {
+    margin: 0 auto;
     background: rgba(148, 159, 163, 0.75);
     border-radius: 50px;
     border: none;
